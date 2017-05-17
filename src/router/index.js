@@ -6,6 +6,7 @@ import Hello from '@/components/Hello';
 import Bye from '@/components/Bye';
 import Secret from '@/components/Secret';
 import * as perimeters from '../perimeters';
+import RouteGoverness from '../governesses/RouteGoverness';
 import child from '../child';
 import store from '../store';
 
@@ -39,11 +40,14 @@ router.beforeEach((to, from, next) => {
       perimeters: [
         perimeter,
       ],
+
+      governess: new RouteGoverness({ from, to, next }),
     });
 
-    if (!sandbox.isAllowed('route')) {
-      return next('/');
-    }
+    // if (!sandbox.isAllowed('route')) {
+    //   return next('/');
+    // }
+    return sandbox.guard('route');
   }
 
   return next();
