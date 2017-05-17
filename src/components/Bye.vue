@@ -5,6 +5,16 @@
     <span>|</span>
     <router-link to="/secret">Secret</router-link>
 
-    <p>This paragraph is secret!</p>
+    <p v-show="$bye.isAllowed('viewParagraph')">This paragraph is secret!</p>
   </div>
 </template>
+
+<script>
+  import byePerimeter from '../perimeters/byePerimeter';
+
+  export default {
+    perimeters: [
+      byePerimeter,
+    ],
+  };
+</script>
